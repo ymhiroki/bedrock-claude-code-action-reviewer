@@ -231,6 +231,7 @@ Claude Code Actionを活用できる具体的なシナリオをいくつか紹�
 
 `tetris/`ディレクトリには、Claude Code Actionsの動作確認用のテトリスゲーム実装が含まれています。このプロジェクトは、GitHub上でClaude Code Actionsを使用した際の挙動や機能を検証するための実践的なサンプルとして作成されました。
 
+ここから遊べます: [GitHub Pages](https://ymhiroki.github.io/bedrock-claude-code-action-reviewer/)
 ### 目的
 
 - Claude Code Actionsによるコードレビュー機能の確認
