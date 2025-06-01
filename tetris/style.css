@@ -209,11 +209,16 @@ button:active {
     border-radius: 50%;
     border: 2px solid white;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .theme-button:hover {
     transform: scale(1.1);
+}
+
+.theme-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
 }
 
 .theme-button.active {
@@ -222,6 +227,10 @@ button:active {
 }
 
 /* カスタムテーマ定義 */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 /* デフォルトテーマ（青色/紫系） */
 .theme-default {
     --bg-color: #1f2937;
