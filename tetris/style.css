@@ -5,6 +5,17 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+/* テーマの定義 */
+:root {
+    --bg-color: #1f2937;
+    --panel-color: #1e293b;
+    --text-color: #ffffff;
+    --accent-color: #3b82f6;
+    --accent-gradient: linear-gradient(to right, #3b82f6, #a855f7);
+    --button-color: #3b82f6;
+    --button-hover: #2563eb;
+}
+
 /* ピースの色 */
 .piece-i {
     background-color: #00f0f0;
@@ -180,4 +191,97 @@ button:active {
 @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* テーマスイッチャー */
+#theme-selector {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 100;
+}
+
+.theme-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+    transform: scale(1.1);
+}
+
+.theme-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+.theme-button.active {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+/* カスタムテーマ定義 */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* デフォルトテーマ（青色/紫系） */
+.theme-default {
+    --bg-color: #1f2937;
+    --panel-color: #1e293b;
+    --text-color: #ffffff;
+    --accent-color: #3b82f6;
+    --accent-gradient: linear-gradient(to right, #3b82f6, #a855f7);
+    --button-color: #3b82f6;
+    --button-hover: #2563eb;
+}
+
+/* ダークテーマ */
+.theme-dark {
+    --bg-color: #111827;
+    --panel-color: #0f172a;
+    --text-color: #a3a3a3;
+    --accent-color: #4b5563;
+    --accent-gradient: linear-gradient(to right, #4b5563, #6b7280);
+    --button-color: #4b5563;
+    --button-hover: #374151;
+}
+
+/* レトロテーマ */
+.theme-retro {
+    --bg-color: #2c2c2c;
+    --panel-color: #000000;
+    --text-color: #33ff33;
+    --accent-color: #33ff33;
+    --accent-gradient: linear-gradient(to right, #33ff33, #33aa33);
+    --button-color: #33aa33;
+    --button-hover: #33ff33;
+}
+
+/* パステルテーマ */
+.theme-pastel {
+    --bg-color: #f9f7f5;
+    --panel-color: #ffffff;
+    --text-color: #594a4e;
+    --accent-color: #f7cac9;
+    --accent-gradient: linear-gradient(to right, #f7cac9, #92a8d1);
+    --button-color: #f7cac9;
+    --button-hover: #ffb6c1;
+}
+
+/* ネオンテーマ */
+.theme-neon {
+    --bg-color: #000000;
+    --panel-color: #0a0a0a;
+    --text-color: #ffffff;
+    --accent-color: #ff00ff;
+    --accent-gradient: linear-gradient(to right, #ff00ff, #00ffff);
+    --button-color: #ff00ff;
+    --button-hover: #00ffff;
 }
