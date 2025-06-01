@@ -116,13 +116,13 @@ Claude Code Action は以下のイベントで起動します：
 
 1. **Issue での利用**
 
-   - Issue 作成時に本文に `@claude` を含める
-   - Issue コメントで `@claude` と記述する
+   - Issue 作成時に本文に `@claude` を含める [利用例](https://github.com/ymhiroki/bedrock-claude-code-action-reviewer/issues/1#issue-3107026047)
+   - Issue コメントで `@claude` と記述する [利用例](https://github.com/ymhiroki/bedrock-claude-code-action-reviewer/issues/5#issuecomment-2927146166)
 
 2. **プルリクエストでの利用**
    - PR 作成時に本文 (descriptions) に `@claude` を含める
-   - PR にコメントで `@claude` と記述する
-   - PR の特定のコード行にレビューコメントで `@claude` と記述する
+   - PR にコメントで `@claude` と記述する [利用例](https://github.com/ymhiroki/bedrock-claude-code-action-reviewer/pull/3#issuecomment-2927066163)
+   - PR の特定のコード行にレビューコメントで `@claude` と記述する [利用例](https://github.com/ymhiroki/bedrock-claude-code-action-reviewer/pull/3#discussion_r2119098970)
    - PR レビュー時のコメントで `@claude` と記述する
 
 Claude Code Action は、コードの生成や修正、質問への回答など、様々なタスクに対応できます。例えば：
