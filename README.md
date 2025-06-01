@@ -98,6 +98,17 @@ cdk deploy
    - 対応しているモデルおよび推論プロファイルは [Supported Regions and models for inference profiles](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html) から確認できます。
      - US Claude Sonnet 4: `us.anthropic.claude-sonnet-4-20250514-v1:0`
      - US Claude Opus 4: `us.anthropic.claude-opus-4-20250514-v1:0`
+   - **重要**: デフォルトでは、GitHub ユーザー `ymhiroki` のみが Claude を呼び出せるように制限されています。他のユーザーが利用する場合は、`.github/workflows/claude.yaml` の以下の部分を変更してください:
+   
+   ```yaml
+   if: |
+     (github.actor == 'ymhiroki') && (
+       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+       ...
+     )
+   ```
+   
+   上記の `github.actor == 'ymhiroki'` を自分のGitHubユーザー名に変更するか、この条件を削除して誰でも利用できるようにします。
 
 ## 利用方法
 
