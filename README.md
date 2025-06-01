@@ -1,12 +1,17 @@
-# Bedrock Claude Code PR Review
+# Bedrock Claude Code Action PR Reviewer
 
-GitHub ActionsとAmazon Bedrockを使用して、プルリクエストの自動コードレビューを行うプロジェクトです。
+[![GitHub license](https://img.shields.io/github/license/ymhiroki/bedrock-claude-code-action-reviewer)](https://github.com/ymhiroki/bedrock-claude-code-action-reviewer/blob/main/LICENSE)
 
-## 機能
+GitHub ActionsとAmazon Bedrockを使用して、プルリクエストの自動コードレビューや開発支援を行うプロジェクトです。Claude AIを活用して、コードレビュー、バグ修正、新機能の実装サポートなどを自動化します。
 
-- GitHub ActionsからAWS Bedrockを利用するためのOIDC連携
-- Claude AIモデルを使用したコードレビュー
-- プルリクエストへの自動コメント
+## 主な機能
+
+- GitHub ActionsからAWS Bedrockを利用するためのOIDC連携設定
+- Claude AIモデルを使用した高度なコードレビュー
+- プルリクエストへの自動コメントと改善提案
+- Issue対応や新機能実装の自動化支援
+- CLAUDE.mdによる柔軟なAIカスタマイズ
+- テトリスサンプルプロジェクトによる動作検証
 
 ## セットアップ方法
 
@@ -55,7 +60,7 @@ npx cdk deploy
 
 ## 使用方法
 
-設定が完了すると、以下の方法でClaude AIを利用できます：
+設定が完了すると、以下の方法でClaude AIを利用できます。デモはこちらから試せます：[Tetris Demo](https://ymhiroki.github.io/bedrock-claude-code-action-reviewer/)
 
 ### PR自動レビュー
 
@@ -82,8 +87,10 @@ Claude Code Actionは、コードの生成や修正、質問への回答など�
 - 「このAPIの使い方を説明して」
 - 「このコードをリファクタリングして」
 - 「このコードにテストを追加して」
+- 「READMEの改善案を考えて」
+- 「新機能のプランを立てて」
 
-などの指示を出すことができます。
+などの指示を関西弁で応答します（CLAUDE.mdでカスタマイズ可能）。
 
 ## カスタマイズ
 
@@ -227,11 +234,11 @@ Claude Code Actionを活用できる具体的なシナリオをいくつか紹�
 - **任意のBashコマンドの実行**: デフォルトでは、`allowed_tools`設定で明示的に許可されていない限り、Bashコマンドを実行できません
 - **CI/CDの結果の閲覧**: 追加のツールやMCPサーバーが設定されていない限り、CIシステム、テスト結果、ビルドログにアクセスできません
 - **ブランチ操作の実行**: コミットのプッシュ以外のブランチのマージ、リベース、その他のgit操作を実行できません
-## テトリスプロジェクト
+## 🎮 テトリスデモプロジェクト
 
 `tetris/`ディレクトリには、Claude Code Actionsの動作確認用のテトリスゲーム実装が含まれています。このプロジェクトは、GitHub上でClaude Code Actionsを使用した際の挙動や機能を検証するための実践的なサンプルとして作成されました。
 
-ここから遊べます: [GitHub Pages](https://ymhiroki.github.io/bedrock-claude-code-action-reviewer/)
+[![テトリスデモ](https://img.shields.io/badge/Demo-Play%20Tetris-blue)](https://ymhiroki.github.io/bedrock-claude-code-action-reviewer/)
 ### 目的
 
 - Claude Code Actionsによるコードレビュー機能の確認
@@ -246,4 +253,4 @@ Claude Code Actionを活用できる具体的なシナリオをいくつか紹�
 - 基本的なテトリス機能に加え、ゴーストピース、ホールド機能などの追加機能
 - バージョン管理ルールを含むCLAUDE.mdファイル
 
-詳細は `tetris/README.md` を参照してください。
+詳細は [`tetris/README.md`](./tetris/README.md) を参照してください。
