@@ -9,6 +9,11 @@ const TetrisUtils = (function() {
     const VERSION = '1.0.0';
     const VERSION_DATE = '2025-06-01';
     
+    // ローカルストレージキー
+    const STORAGE_KEYS = {
+        THEME: 'tetris_theme'
+    };
+    
     // 効果音の再生（実装は省略）
     function playSound(type) {
         // 実際の効果音実装はここに追加
@@ -29,8 +34,29 @@ const TetrisUtils = (function() {
             
             // バージョン番号をクリックしたときの処理
             versionElement.addEventListener('click', () => {
-                alert(`Tailwind Tetris\nVersion: ${VERSION}\nLast updated: ${VERSION_DATE}\n\nChangelog:\n- Initial release\n- Added ghost piece feature\n- Added hold piece feature\n- Fixed line clearing bug`);
+                alert(`Tailwind Tetris\nVersion: ${VERSION}\nLast updated: ${VERSION_DATE}\n\nChangelog:\n- Initial release\n- Added ghost piece feature\n- Added hold piece feature\n- Fixed line clearing bug\n- Added theme customization feature`);
             });
+        }
+    }
+    
+    // テーマの保存
+    function saveTheme(theme) {
+        try {
+            localStorage.setItem(STORAGE_KEYS.THEME, theme);
+            return true;
+        } catch (error) {
+            console.error('Failed to save theme to localStorage:', error);
+            return false;
+        }
+    }
+    
+    // 保存されたテーマの取得
+    function getSavedTheme() {
+        try {
+            return localStorage.getItem(STORAGE_KEYS.THEME) || 'default';
+        } catch (error) {
+            console.error('Failed to get theme from localStorage:', error);
+            return 'default';
         }
     }
     
@@ -40,6 +66,8 @@ const TetrisUtils = (function() {
         VERSION_DATE,
         playSound,
         calculateDropSpeed,
-        initVersionInfo
+        initVersionInfo,
+        saveTheme,
+        getSavedTheme
     };
 })();

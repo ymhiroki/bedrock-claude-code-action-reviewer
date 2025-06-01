@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4" id="game-container">
     <div class="container max-w-4xl mx-auto">
         <h1 class="text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Tailwind Tetris</h1>
         
@@ -93,6 +93,18 @@
                         <div>Z-ピース:</div><div id="stats-z" class="text-right">0</div>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- テーマ選択 -->
+        <div class="bg-gray-800 rounded-lg p-4 shadow-lg mt-6">
+            <h2 class="text-xl font-semibold mb-3 text-blue-400 text-center">テーマ</h2>
+            <div class="theme-selectors">
+                <button class="theme-btn default active" data-theme="default">デフォルト</button>
+                <button class="theme-btn dark" data-theme="dark">ダーク</button>
+                <button class="theme-btn classic" data-theme="classic">クラシック</button>
+                <button class="theme-btn neon" data-theme="neon">ネオン</button>
+                <button class="theme-btn pastel" data-theme="pastel">パステル</button>
             </div>
         </div>
         

@@ -16,11 +16,17 @@ const TetrisUI = (function() {
     let pauseButton;
     let restartButton;
     let statsElements = {};
+    let themeButtons = [];
+    let gameContainer;
+    
+    // 利用可能なテーマ
+    const THEMES = ['default', 'dark', 'classic', 'neon', 'pastel'];
     
     // ゲーム状態
     let score = 0;
     let level = 1;
     let lines = 0;
+    let currentTheme = 'default';
     
     // 初期化
     function init(elements) {
@@ -49,6 +55,62 @@ const TetrisUI = (function() {
         updateScore(0);
         updateLevel(1);
         updateLines(0);
+        
+        // テーマ関連の初期化
+        initThemes();
+    }
+    
+    // テーマ関連の初期化
+    function initThemes() {
+        // ゲームコンテナ要素を取得
+        gameContainer = document.getElementById('game-container');
+        
+        // テーマ選択ボタンの取得と設定
+        themeButtons = Array.from(document.querySelectorAll('.theme-btn'));
+        
+        themeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const theme = button.getAttribute('data-theme');
+                changeTheme(theme);
+            });
+        });
+        
+        // 保存されたテーマがあれば適用
+        const savedTheme = TetrisUtils.getSavedTheme();
+        if (savedTheme && THEMES.includes(savedTheme)) {
+            changeTheme(savedTheme);
+        } else {
+            changeTheme('default'); // デフォルトテーマを適用
+        }
+    }
+    
+    // テーマの変更
+    function changeTheme(theme) {
+        if (!THEMES.includes(theme)) return;
+        
+        // 現在のテーマクラスを削除
+        THEMES.forEach(themeName => {
+            gameContainer.classList.remove(`${themeName}-theme`);
+        });
+        
+        // 新しいテーマクラスを追加
+        gameContainer.classList.add(`${theme}-theme`);
+        
+        // アクティブなボタンを更新
+        themeButtons.forEach(button => {
+            if (button.getAttribute('data-theme') === theme) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
+        });
+        
+        // 現在のテーマを保存
+        currentTheme = theme;
+        TetrisUtils.saveTheme(theme);
+        
+        // 効果音を再生
+        TetrisUtils.playSound('theme');
     }
     
     // スコアの更新
@@ -206,6 +268,11 @@ const TetrisUI = (function() {
         };
     }
     
+    // 現在のテーマを取得
+    function getCurrentTheme() {
+        return currentTheme;
+    }
+    
     // 公開API
     return {
         init,
@@ -220,6 +287,8 @@ const TetrisUI = (function() {
         togglePauseDisplay,
         updateButtons,
         resetUI,
-        getScoreInfo
+        getScoreInfo,
+        changeTheme,
+        getCurrentTheme
     };
 })();

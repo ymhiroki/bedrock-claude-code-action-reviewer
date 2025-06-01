@@ -1,11 +1,75 @@
-/* テトリスのブロックスタイル */
+/* ============================================
+   テーマ選択用のスタイル
+   ============================================ */
+.theme-selectors {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.theme-btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.theme-btn.active {
+    transform: scale(1.05);
+    font-weight: bold;
+    border-color: #000;
+}
+
+.theme-btn:hover {
+    transform: scale(1.05);
+}
+
+/* デフォルトテーマ */
+.theme-btn.default {
+    background: linear-gradient(135deg, #f0f0f0, #c0c0c0);
+}
+
+/* ダークテーマ */
+.theme-btn.dark {
+    background: linear-gradient(135deg, #333, #111);
+    color: #fff;
+}
+
+/* クラシックテーマ */
+.theme-btn.classic {
+    background: linear-gradient(135deg, #a0a0a0, #707070);
+    color: #000;
+}
+
+/* ネオンテーマ */
+.theme-btn.neon {
+    background: linear-gradient(135deg, #0f1026, #1a1b46);
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff;
+}
+
+/* パステルテーマ */
+.theme-btn.pastel {
+    background: linear-gradient(135deg, #ffcce6, #ccf2ff);
+    color: #555;
+}
+
+/* ============================================
+   テトリスのブロックスタイル - 共通部分
+   ============================================ */
 .tetris-cell {
     width: 25px;
     height: 25px;
     border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-/* ピースの色 */
+/* ============================================
+   デフォルトテーマのピースの色
+   ============================================ */
+
+/* Default theme (already exists) */
 .piece-i {
     background-color: #00f0f0;
     box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.5);
@@ -41,7 +105,207 @@
     box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
-/* ゴーストピース */
+/* ============================================
+   ダークテーマのピースの色
+   ============================================ */
+.dark-theme .piece-i {
+    background-color: #008080;
+    box-shadow: inset 0 0 10px rgba(0, 128, 128, 0.7);
+}
+
+.dark-theme .piece-j {
+    background-color: #000080;
+    box-shadow: inset 0 0 10px rgba(0, 0, 128, 0.7);
+}
+
+.dark-theme .piece-l {
+    background-color: #804000;
+    box-shadow: inset 0 0 10px rgba(128, 64, 0, 0.7);
+}
+
+.dark-theme .piece-o {
+    background-color: #808000;
+    box-shadow: inset 0 0 10px rgba(128, 128, 0, 0.7);
+}
+
+.dark-theme .piece-s {
+    background-color: #008000;
+    box-shadow: inset 0 0 10px rgba(0, 128, 0, 0.7);
+}
+
+.dark-theme .piece-t {
+    background-color: #400080;
+    box-shadow: inset 0 0 10px rgba(64, 0, 128, 0.7);
+}
+
+.dark-theme .piece-z {
+    background-color: #800000;
+    box-shadow: inset 0 0 10px rgba(128, 0, 0, 0.7);
+}
+
+.dark-theme .tetris-cell {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark-theme #game-board {
+    background-color: #111;
+}
+
+/* ============================================
+   クラシックテーマのピースの色
+   ============================================ */
+.classic-theme .piece-i {
+    background-color: #00ffff;
+    box-shadow: none;
+    border: 2px solid #008b8b;
+}
+
+.classic-theme .piece-j {
+    background-color: #0000cd;
+    box-shadow: none;
+    border: 2px solid #00008b;
+}
+
+.classic-theme .piece-l {
+    background-color: #ff8c00;
+    box-shadow: none;
+    border: 2px solid #d26900;
+}
+
+.classic-theme .piece-o {
+    background-color: #ffff00;
+    box-shadow: none;
+    border: 2px solid #b8b800;
+}
+
+.classic-theme .piece-s {
+    background-color: #32cd32;
+    box-shadow: none;
+    border: 2px solid #228b22;
+}
+
+.classic-theme .piece-t {
+    background-color: #9932cc;
+    box-shadow: none;
+    border: 2px solid #6a1b9a;
+}
+
+.classic-theme .piece-z {
+    background-color: #ff0000;
+    box-shadow: none;
+    border: 2px solid #b30000;
+}
+
+.classic-theme .tetris-cell {
+    border: 1px solid #777;
+}
+
+.classic-theme #game-board {
+    background-color: #c0c0c0;
+}
+
+/* ============================================
+   ネオンテーマのピースの色
+   ============================================ */
+.neon-theme .piece-i {
+    background-color: #00ffff;
+    box-shadow: 0 0 15px #00ffff, inset 0 0 10px rgba(0, 255, 255, 0.8);
+    border: 1px solid #7fffff;
+}
+
+.neon-theme .piece-j {
+    background-color: #0080ff;
+    box-shadow: 0 0 15px #0080ff, inset 0 0 10px rgba(0, 128, 255, 0.8);
+    border: 1px solid #80c0ff;
+}
+
+.neon-theme .piece-l {
+    background-color: #ff8000;
+    box-shadow: 0 0 15px #ff8000, inset 0 0 10px rgba(255, 128, 0, 0.8);
+    border: 1px solid #ffc080;
+}
+
+.neon-theme .piece-o {
+    background-color: #ffff00;
+    box-shadow: 0 0 15px #ffff00, inset 0 0 10px rgba(255, 255, 0, 0.8);
+    border: 1px solid #ffff80;
+}
+
+.neon-theme .piece-s {
+    background-color: #00ff00;
+    box-shadow: 0 0 15px #00ff00, inset 0 0 10px rgba(0, 255, 0, 0.8);
+    border: 1px solid #80ff80;
+}
+
+.neon-theme .piece-t {
+    background-color: #bf00ff;
+    box-shadow: 0 0 15px #bf00ff, inset 0 0 10px rgba(191, 0, 255, 0.8);
+    border: 1px solid #df80ff;
+}
+
+.neon-theme .piece-z {
+    background-color: #ff0000;
+    box-shadow: 0 0 15px #ff0000, inset 0 0 10px rgba(255, 0, 0, 0.8);
+    border: 1px solid #ff8080;
+}
+
+.neon-theme .tetris-cell {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.neon-theme #game-board {
+    background-color: #0a0a1e;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+/* ============================================
+   パステルテーマのピースの色
+   ============================================ */
+.pastel-theme .piece-i {
+    background-color: #a5f2f3;
+    box-shadow: inset 0 0 10px rgba(165, 242, 243, 0.5);
+}
+
+.pastel-theme .piece-j {
+    background-color: #a5a5f3;
+    box-shadow: inset 0 0 10px rgba(165, 165, 243, 0.5);
+}
+
+.pastel-theme .piece-l {
+    background-color: #f3d1a5;
+    box-shadow: inset 0 0 10px rgba(243, 209, 165, 0.5);
+}
+
+.pastel-theme .piece-o {
+    background-color: #f3f3a5;
+    box-shadow: inset 0 0 10px rgba(243, 243, 165, 0.5);
+}
+
+.pastel-theme .piece-s {
+    background-color: #c1f3a5;
+    box-shadow: inset 0 0 10px rgba(193, 243, 165, 0.5);
+}
+
+.pastel-theme .piece-t {
+    background-color: #e2a5f3;
+    box-shadow: inset 0 0 10px rgba(226, 165, 243, 0.5);
+}
+
+.pastel-theme .piece-z {
+    background-color: #f3a5a5;
+    box-shadow: inset 0 0 10px rgba(243, 165, 165, 0.5);
+}
+
+.pastel-theme .tetris-cell {
+    border: 1px solid rgba(150, 150, 150, 0.2);
+}
+
+.pastel-theme #game-board {
+    background-color: #fafafa;
+    box-shadow: 0 0 10px rgba(200, 200, 200, 0.5);
+}
+
+/* ゴーストピース - すべてのテーマ共通 */
 .ghost {
     opacity: 0.3;
     border: 1px dashed rgba(255, 255, 255, 0.5);
@@ -72,7 +336,9 @@
     height: 20px;
 }
 
-/* アニメーション */
+/* ============================================
+   アニメーション - 共通
+   ============================================ */
 @keyframes flash {
     0% { opacity: 1; }
     50% { opacity: 0.5; }
@@ -92,7 +358,71 @@
     animation: fall 0.5s ease-out;
 }
 
-/* レスポンシブ調整 */
+/* ============================================
+   テーマ特有のアニメーション
+   ============================================ */
+/* ネオンテーマ用の追加アニメーション */
+@keyframes neon-pulse {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+    100% { filter: brightness(1); }
+}
+
+.neon-theme .piece-i,
+.neon-theme .piece-j,
+.neon-theme .piece-l,
+.neon-theme .piece-o,
+.neon-theme .piece-s,
+.neon-theme .piece-t,
+.neon-theme .piece-z {
+    animation: neon-pulse 2s infinite;
+}
+
+/* ダークテーマ用のライン消去アニメーション */
+@keyframes dark-clear-line {
+    0% { background-color: #444; }
+    100% { background-color: transparent; }
+}
+
+.dark-theme .clear-line {
+    animation: dark-clear-line 0.3s ease-in-out;
+}
+
+/* クラシックテーマのシンプルなアニメーション */
+@keyframes classic-flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.classic-theme .flash {
+    animation: classic-flash 0.3s linear;
+}
+
+/* パステルテーマ用の優しいアニメーション */
+@keyframes pastel-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pastel-theme .piece-i,
+.pastel-theme .piece-j,
+.pastel-theme .piece-l,
+.pastel-theme .piece-o,
+.pastel-theme .piece-s,
+.pastel-theme .piece-t,
+.pastel-theme .piece-z {
+    transition: all 0.3s ease;
+}
+
+.pastel-theme .tetris-cell.active {
+    animation: pastel-pulse 1s infinite;
+}
+
+/* ============================================
+   レスポンシブ調整
+   ============================================ */
 @media (max-width: 768px) {
     .tetris-cell {
         width: 20px;
@@ -120,7 +450,9 @@ button:active {
     transform: scale(0.98);
 }
 
-/* ゲームオーバーアニメーション */
+/* ============================================
+   ゲームオーバーアニメーション - 共通およびテーマ固有
+   ============================================ */
 @keyframes shake {
     0% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
@@ -133,7 +465,32 @@ button:active {
     animation: shake 0.5s ease-in-out;
 }
 
-/* レベルアップアニメーション */
+/* ネオンテーマのゲームオーバー */
+@keyframes neon-game-over {
+    0% { filter: brightness(1); box-shadow: 0 0 15px rgba(255, 0, 0, 0.5); }
+    50% { filter: brightness(2); box-shadow: 0 0 30px rgba(255, 0, 0, 0.8); }
+    100% { filter: brightness(1); box-shadow: 0 0 15px rgba(255, 0, 0, 0.5); }
+}
+
+.neon-theme .shake {
+    animation: shake 0.5s ease-in-out, neon-game-over 1s ease-in-out infinite;
+}
+
+/* ダークテーマのゲームオーバー */
+@keyframes dark-game-over {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.dark-theme .shake {
+    animation: shake 0.5s ease-in-out, dark-game-over 1s ease-in-out infinite;
+    border: 2px solid rgba(255, 0, 0, 0.7);
+}
+
+/* ============================================
+   レベルアップアニメーション - 共通およびテーマ固有
+   ============================================ */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.2); }
@@ -144,7 +501,31 @@ button:active {
     animation: pulse 0.5s ease-in-out;
 }
 
-/* ライン消去アニメーション */
+/* ネオンテーマのレベルアップ */
+@keyframes neon-level-up {
+    0% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(180deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+.neon-theme .pulse {
+    animation: pulse 0.5s ease-in-out, neon-level-up 0.8s linear;
+}
+
+/* パステルテーマのレベルアップ */
+@keyframes pastel-level-up {
+    0% { background-color: rgba(255, 255, 255, 0.5); }
+    50% { background-color: rgba(255, 255, 255, 0.9); }
+    100% { background-color: rgba(255, 255, 255, 0.5); }
+}
+
+.pastel-theme .pulse {
+    animation: pulse 0.7s ease-in-out, pastel-level-up 1s ease-in-out;
+}
+
+/* ============================================
+   ライン消去アニメーション - 共通およびテーマ固有
+   ============================================ */
 @keyframes clear-line {
     0% { background-color: white; }
     100% { background-color: transparent; }
@@ -153,7 +534,113 @@ button:active {
 .clear-line {
     animation: clear-line 0.3s ease-in-out;
 }
-/* バージョン表示のスタイル */
+
+/* ネオンテーマのライン消去 */
+@keyframes neon-clear-line {
+    0% { background-color: #00ffff; box-shadow: 0 0 20px #00ffff; }
+    100% { background-color: transparent; box-shadow: none; }
+}
+
+.neon-theme .clear-line {
+    animation: neon-clear-line 0.5s ease-in-out;
+}
+
+/* クラシックテーマのライン消去 */
+@keyframes classic-clear-line {
+    0% { background-color: #888; }
+    50% { background-color: white; }
+    100% { background-color: transparent; }
+}
+
+.classic-theme .clear-line {
+    animation: classic-clear-line 0.4s step-end;
+}
+
+/* パステルテーマのライン消去 */
+@keyframes pastel-clear-line {
+    0% { background-color: #fff; }
+    50% { background-color: #fafafa; }
+    100% { background-color: transparent; }
+}
+
+.pastel-theme .clear-line {
+    animation: pastel-clear-line 0.6s ease-out;
+}
+/* ============================================
+   テーマ切り替え関連のクラス
+   ============================================ */
+.theme-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.theme-title {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* テーマごとの背景とUI要素 */
+.default-theme {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.dark-theme {
+    background-color: #1a1a1a;
+    color: #eee;
+}
+
+.dark-theme button {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+.classic-theme {
+    background-color: #d0d0d0;
+    color: #000;
+    font-family: 'Courier New', monospace;
+}
+
+.classic-theme button {
+    background-color: #a0a0a0;
+    color: #000;
+    border: 2px outset #ccc;
+    border-radius: 0;
+}
+
+.neon-theme {
+    background-color: #0a0a1e;
+    color: #0ff;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+}
+
+.neon-theme button {
+    background-color: #1a1a46;
+    color: #0ff;
+    border: 1px solid #0ff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+}
+
+.pastel-theme {
+    background-color: #f5f5ff;
+    color: #707070;
+}
+
+.pastel-theme button {
+    background-color: #e8e8ff;
+    color: #707070;
+    border: 1px solid #d0d0f0;
+    box-shadow: 0 2px 5px rgba(200, 200, 240, 0.3);
+}
+
+/* ============================================
+   バージョン表示のスタイル - テーマ対応
+   ============================================ */
 .version {
     font-family: monospace;
     font-size: 0.8rem;
@@ -175,6 +662,39 @@ button:active {
     white-space: nowrap;
     opacity: 0;
     animation: fade-in 0.3s ease forwards;
+}
+
+/* テーマごとのバージョン表示 */
+.dark-theme .version {
+    color: #9ca3af;
+}
+
+.dark-theme .version:hover::after {
+    background-color: #4b5563;
+}
+
+.neon-theme .version {
+    color: #0080b3;
+    text-shadow: 0 0 3px rgba(0, 128, 255, 0.5);
+}
+
+.neon-theme .version:hover::after {
+    background-color: #1a1b46;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.classic-theme .version {
+    color: #555;
+    font-family: 'Courier New', monospace;
+}
+
+.pastel-theme .version {
+    color: #a0a0d0;
+}
+
+.pastel-theme .version:hover::after {
+    background-color: #c0c0e8;
+    color: #707090;
 }
 
 @keyframes fade-in {
