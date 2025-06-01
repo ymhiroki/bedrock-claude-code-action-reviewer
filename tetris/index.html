@@ -7,38 +7,45 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4">
+<body class="theme-default min-h-screen flex items-center justify-center p-4" style="background-color: var(--bg-color); color: var(--text-color);">
+    <div id="theme-selector">
+        <button class="theme-button active" data-theme="default" style="background: linear-gradient(to right, #3b82f6, #a855f7);"></button>
+        <button class="theme-button" data-theme="dark" style="background: linear-gradient(to right, #4b5563, #6b7280);"></button>
+        <button class="theme-button" data-theme="retro" style="background: linear-gradient(to right, #33ff33, #33aa33);"></button>
+        <button class="theme-button" data-theme="pastel" style="background: linear-gradient(to right, #f7cac9, #92a8d1);"></button>
+        <button class="theme-button" data-theme="neon" style="background: linear-gradient(to right, #ff00ff, #00ffff);"></button>
+    </div>
     <div class="container max-w-4xl mx-auto">
-        <h1 class="text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Tailwind Tetris</h1>
+        <h1 class="text-4xl font-bold text-center mb-8 text-transparent bg-clip-text" style="background-image: var(--accent-gradient);">Tailwind Tetris</h1>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- 左側のコントロールパネル -->
-            <div class="bg-gray-800 rounded-lg p-6 shadow-lg flex flex-col">
+            <div class="rounded-lg p-6 shadow-lg flex flex-col" style="background-color: var(--panel-color);">
                 <div class="mb-6">
-                    <h2 class="text-xl font-semibold mb-3 text-blue-400">スコア</h2>
+                    <h2 class="text-xl font-semibold mb-3" style="color: var(--accent-color);">スコア</h2>
                     <div id="score" class="text-3xl font-bold">0</div>
                 </div>
                 
                 <div class="mb-6">
-                    <h2 class="text-xl font-semibold mb-3 text-blue-400">レベル</h2>
+                    <h2 class="text-xl font-semibold mb-3" style="color: var(--accent-color);">レベル</h2>
                     <div id="level" class="text-3xl font-bold">1</div>
                 </div>
                 
                 <div class="mb-6">
-                    <h2 class="text-xl font-semibold mb-3 text-blue-400">ライン</h2>
+                    <h2 class="text-xl font-semibold mb-3" style="color: var(--accent-color);">ライン</h2>
                     <div id="lines" class="text-3xl font-bold">0</div>
                 </div>
                 
-                <button id="start-button" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mb-4">
+                <button id="start-button" class="font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mb-4" style="background-image: var(--accent-gradient); color: var(--text-color);">
                     ゲームスタート
                 </button>
                 
-                <button id="pause-button" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed mb-4" disabled>
+                <button id="pause-button" class="font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed mb-4" style="background-color: var(--button-color); color: var(--text-color);" disabled>
                     一時停止
                 </button>
                 
                 <div class="mt-auto">
-                    <h2 class="text-xl font-semibold mb-3 text-blue-400">操作方法</h2>
+                    <h2 class="text-xl font-semibold mb-3" style="color: var(--accent-color);">操作方法</h2>
                     <ul class="space-y-2 text-sm">
                         <li><span class="inline-block w-20 font-semibold">← →</span>: 左右移動</li>
                         <li><span class="inline-block w-20 font-semibold">↑</span>: 回転</li>
@@ -51,38 +58,38 @@
             
             <!-- 中央のゲームボード -->
             <div class="relative">
-                <div id="game-board" class="bg-gray-800 rounded-lg overflow-hidden shadow-2xl border-2 border-gray-700"></div>
+                <div id="game-board" class="rounded-lg overflow-hidden shadow-2xl border-2" style="background-color: var(--panel-color); border-color: var(--accent-color);"></div>
                 
                 <!-- ゲームオーバーオーバーレイ -->
                 <div id="game-over" class="absolute inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center rounded-lg hidden">
-                    <h2 class="text-3xl font-bold text-red-500 mb-4">GAME OVER</h2>
+                    <h2 class="text-3xl font-bold mb-4" style="color: var(--accent-color);">GAME OVER</h2>
                     <p class="text-xl mb-6">最終スコア: <span id="final-score">0</span></p>
-                    <button id="restart-button" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <button id="restart-button" class="font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1" style="background-image: var(--accent-gradient); color: var(--text-color);">
                         リスタート
                     </button>
                 </div>
                 
                 <!-- 一時停止オーバーレイ -->
                 <div id="pause-overlay" class="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center rounded-lg hidden">
-                    <h2 class="text-3xl font-bold text-yellow-400">PAUSED</h2>
+                    <h2 class="text-3xl font-bold" style="color: var(--accent-color);">PAUSED</h2>
                 </div>
             </div>
             
             <!-- 右側の情報パネル -->
-            <div class="bg-gray-800 rounded-lg p-6 shadow-lg flex flex-col">
+            <div class="rounded-lg p-6 shadow-lg flex flex-col" style="background-color: var(--panel-color);">
                 <div class="mb-6">
-                    <h2 class="text-xl font-semibold mb-3 text-blue-400">次のピース</h2>
-                    <div id="next-piece" class="bg-gray-900 rounded-lg p-4 h-32 flex items-center justify-center"></div>
+                    <h2 class="text-xl font-semibold mb-3" style="color: var(--accent-color);">次のピース</h2>
+                    <div id="next-piece" class="rounded-lg p-4 h-32 flex items-center justify-center" style="background-color: rgba(0, 0, 0, 0.3);"></div>
                 </div>
                 
                 <div class="mb-6">
-                    <h2 class="text-xl font-semibold mb-3 text-blue-400">ホールド</h2>
-                    <div id="hold-piece" class="bg-gray-900 rounded-lg p-4 h-32 flex items-center justify-center"></div>
-                    <p class="text-xs text-gray-400 mt-2">Cキーでホールド</p>
+                    <h2 class="text-xl font-semibold mb-3" style="color: var(--accent-color);">ホールド</h2>
+                    <div id="hold-piece" class="rounded-lg p-4 h-32 flex items-center justify-center" style="background-color: rgba(0, 0, 0, 0.3);"></div>
+                    <p class="text-xs mt-2" style="color: var(--text-color); opacity: 0.7;">Cキーでホールド</p>
                 </div>
                 
                 <div class="mt-auto">
-                    <h2 class="text-xl font-semibold mb-3 text-blue-400">統計</h2>
+                    <h2 class="text-xl font-semibold mb-3" style="color: var(--accent-color);">統計</h2>
                     <div class="grid grid-cols-2 gap-2 text-sm">
                         <div>I-ピース:</div><div id="stats-i" class="text-right">0</div>
                         <div>J-ピース:</div><div id="stats-j" class="text-right">0</div>
@@ -96,9 +103,9 @@
             </div>
         </div>
         
-        <footer class="mt-8 text-center text-gray-500 text-sm">
+        <footer class="mt-8 text-center text-sm" style="color: var(--text-color); opacity: 0.7;">
             <p>© 2025 Tailwind Tetris - Created with ❤️ using Tailwind CSS</p>
-            <p class="version mt-1">Version 1.0.0</p>
+            <p class="version mt-1">Version 1.1.0</p>
         </footer>
     </div>
     

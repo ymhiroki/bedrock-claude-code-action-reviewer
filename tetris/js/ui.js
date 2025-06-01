@@ -22,6 +22,11 @@ const TetrisUI = (function() {
     let level = 1;
     let lines = 0;
     
+    // テーマ関連
+    let currentTheme = 'default';
+    const availableThemes = ['default', 'dark', 'retro', 'pastel', 'neon'];
+    let themeButtons = [];
+    
     // 初期化
     function init(elements) {
         scoreDisplay = elements.scoreDisplay;
@@ -45,10 +50,61 @@ const TetrisUI = (function() {
             z: elements.statsZ
         };
         
+        // テーマボタンの初期化
+        initThemeSelector();
+        
         // 初期表示
         updateScore(0);
         updateLevel(1);
         updateLines(0);
+    }
+    
+    // テーマセレクターの初期化
+    function initThemeSelector() {
+        const themeSelector = document.getElementById('theme-selector');
+        if (!themeSelector) return;
+        
+        themeButtons = Array.from(themeSelector.querySelectorAll('.theme-button'));
+        
+        // ローカルストレージからテーマを復元
+        const savedTheme = localStorage.getItem('tetris-theme');
+        if (savedTheme && availableThemes.includes(savedTheme)) {
+            setTheme(savedTheme);
+        } else {
+            setTheme('default');
+        }
+        
+        // クリックイベントを登録
+        themeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const theme = button.dataset.theme;
+                setTheme(theme);
+            });
+        });
+    }
+    
+    // テーマの設定
+    function setTheme(theme) {
+        if (!availableThemes.includes(theme)) return;
+        
+        // 現在のテーマを削除
+        document.body.classList.remove(`theme-${currentTheme}`);
+        
+        // 新しいテーマを設定
+        document.body.classList.add(`theme-${theme}`);
+        currentTheme = theme;
+        
+        // アクティブなボタンを更新
+        themeButtons.forEach(button => {
+            if (button.dataset.theme === theme) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
+        });
+        
+        // ローカルストレージに保存
+        localStorage.setItem('tetris-theme', theme);
     }
     
     // スコアの更新
@@ -220,6 +276,8 @@ const TetrisUI = (function() {
         togglePauseDisplay,
         updateButtons,
         resetUI,
-        getScoreInfo
+        getScoreInfo,
+        setTheme,
+        initThemeSelector
     };
 })();
