@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Tetris</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4">
+    <div class="container max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Tailwind Tetris</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- 左側のコントロールパネル -->
+            <div class="bg-gray-800 rounded-lg p-6 shadow-lg flex flex-col">
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold mb-3 text-blue-400">スコア</h2>
+                    <div id="score" class="text-3xl font-bold">0</div>
+                </div>
+                
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold mb-3 text-blue-400">レベル</h2>
+                    <div id="level" class="text-3xl font-bold">1</div>
+                </div>
+                
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold mb-3 text-blue-400">ライン</h2>
+                    <div id="lines" class="text-3xl font-bold">0</div>
+                </div>
+                
+                <button id="start-button" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mb-4">
+                    ゲームスタート
+                </button>
+                
+                <button id="pause-button" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed mb-4" disabled>
+                    一時停止
+                </button>
+                
+                <div class="mt-auto">
+                    <h2 class="text-xl font-semibold mb-3 text-blue-400">操作方法</h2>
+                    <ul class="space-y-2 text-sm">
+                        <li><span class="inline-block w-20 font-semibold">← →</span>: 左右移動</li>
+                        <li><span class="inline-block w-20 font-semibold">↑</span>: 回転</li>
+                        <li><span class="inline-block w-20 font-semibold">↓</span>: 高速落下</li>
+                        <li><span class="inline-block w-20 font-semibold">スペース</span>: ハードドロップ</li>
+                        <li><span class="inline-block w-20 font-semibold">P</span>: 一時停止</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 中央のゲームボード -->
+            <div class="relative">
+                <div id="game-board" class="bg-gray-800 rounded-lg overflow-hidden shadow-2xl border-2 border-gray-700"></div>
+                
+                <!-- ゲームオーバーオーバーレイ -->
+                <div id="game-over" class="absolute inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center rounded-lg hidden">
+                    <h2 class="text-3xl font-bold text-red-500 mb-4">GAME OVER</h2>
+                    <p class="text-xl mb-6">最終スコア: <span id="final-score">0</span></p>
+                    <button id="restart-button" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        リスタート
+                    </button>
+                </div>
+                
+                <!-- 一時停止オーバーレイ -->
+                <div id="pause-overlay" class="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center rounded-lg hidden">
+                    <h2 class="text-3xl font-bold text-yellow-400">PAUSED</h2>
+                </div>
+            </div>
+            
+            <!-- 右側の情報パネル -->
+            <div class="bg-gray-800 rounded-lg p-6 shadow-lg flex flex-col">
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold mb-3 text-blue-400">次のピース</h2>
+                    <div id="next-piece" class="bg-gray-900 rounded-lg p-4 h-32 flex items-center justify-center"></div>
+                </div>
+                
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold mb-3 text-blue-400">ホールド</h2>
+                    <div id="hold-piece" class="bg-gray-900 rounded-lg p-4 h-32 flex items-center justify-center"></div>
+                    <p class="text-xs text-gray-400 mt-2">Cキーでホールド</p>
+                </div>
+                
+                <div class="mt-auto">
+                    <h2 class="text-xl font-semibold mb-3 text-blue-400">統計</h2>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div>I-ピース:</div><div id="stats-i" class="text-right">0</div>
+                        <div>J-ピース:</div><div id="stats-j" class="text-right">0</div>
+                        <div>L-ピース:</div><div id="stats-l" class="text-right">0</div>
+                        <div>O-ピース:</div><div id="stats-o" class="text-right">0</div>
+                        <div>S-ピース:</div><div id="stats-s" class="text-right">0</div>
+                        <div>T-ピース:</div><div id="stats-t" class="text-right">0</div>
+                        <div>Z-ピース:</div><div id="stats-z" class="text-right">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="mt-8 text-center text-gray-500 text-sm">
+            <p>© 2025 Tailwind Tetris - Created with ❤️ using Tailwind CSS</p>
+            <p class="version mt-1">Version 1.0.0</p>
+        </footer>
+    </div>
+    
+    <!-- モジュールスクリプト -->
+    <script src="js/pieces.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/game.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

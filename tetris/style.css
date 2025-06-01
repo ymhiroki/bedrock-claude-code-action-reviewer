@@ -1,0 +1,183 @@
+/* テトリスのブロックスタイル */
+.tetris-cell {
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* ピースの色 */
+.piece-i {
+    background-color: #00f0f0;
+    box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.piece-j {
+    background-color: #0000f0;
+    box-shadow: inset 0 0 10px rgba(0, 0, 255, 0.5);
+}
+
+.piece-l {
+    background-color: #f0a000;
+    box-shadow: inset 0 0 10px rgba(255, 165, 0, 0.5);
+}
+
+.piece-o {
+    background-color: #f0f000;
+    box-shadow: inset 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.piece-s {
+    background-color: #00f000;
+    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.piece-t {
+    background-color: #a000f0;
+    box-shadow: inset 0 0 10px rgba(170, 0, 255, 0.5);
+}
+
+.piece-z {
+    background-color: #f00000;
+    box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* ゴーストピース */
+.ghost {
+    opacity: 0.3;
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+}
+
+/* ゲームボードのグリッド */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 25px);
+    grid-template-rows: repeat(20, 25px);
+    gap: 1px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+/* 次のピースとホールドピースのプレビュー */
+#next-piece, #hold-piece {
+    display: grid;
+    grid-template-columns: repeat(4, 20px);
+    grid-template-rows: repeat(4, 20px);
+    gap: 1px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#next-piece .tetris-cell, #hold-piece .tetris-cell {
+    width: 20px;
+    height: 20px;
+}
+
+/* アニメーション */
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.flash {
+    animation: flash 0.5s linear;
+}
+
+@keyframes fall {
+    from { transform: translateY(-100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.fall-in {
+    animation: fall 0.5s ease-out;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+    .tetris-cell {
+        width: 20px;
+        height: 20px;
+    }
+    
+    #game-board {
+        grid-template-columns: repeat(10, 20px);
+        grid-template-rows: repeat(20, 20px);
+    }
+    
+    #next-piece, #hold-piece {
+        grid-template-columns: repeat(4, 15px);
+        grid-template-rows: repeat(4, 15px);
+    }
+    
+    #next-piece .tetris-cell, #hold-piece .tetris-cell {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+/* ボタンのアクティブ状態 */
+button:active {
+    transform: scale(0.98);
+}
+
+/* ゲームオーバーアニメーション */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* レベルアップアニメーション */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+    animation: pulse 0.5s ease-in-out;
+}
+
+/* ライン消去アニメーション */
+@keyframes clear-line {
+    0% { background-color: white; }
+    100% { background-color: transparent; }
+}
+
+.clear-line {
+    animation: clear-line 0.3s ease-in-out;
+}
+/* バージョン表示のスタイル */
+.version {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #6b7280;
+    position: relative;
+}
+
+.version:hover::after {
+    content: 'Last updated: 2025-06-01';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #374151;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    animation: fade-in 0.3s ease forwards;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
