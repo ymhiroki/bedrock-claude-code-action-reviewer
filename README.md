@@ -2,6 +2,8 @@
 
 [Claude Code Action](https://github.com/anthropics/claude-code-action) と [Amazon Bedrock](https://aws.amazon.com/jp/bedrock/) を使用した、Issue 対応 & コードレビューのサンプル実装です。
 
+リポジトリの解説記事は [Claude Code GitHub Actions w/ Amazon Bedrock で Issue 対応 & コードレビューしてもらう](https://zenn.dev/yh1iroki/articles/03d93d78e93c62) からご確認いただけます。
+
 ## 動作例
 - Issue 対応:  [テトリスの機能追加案を考える #1](https://github.com/ymhiroki/bedrock-claude-code-action-reviewer/issues/1)
 - コードレビュー: [テトリスにカスタムテーマ機能を実装 #3](https://github.com/ymhiroki/bedrock-claude-code-action-reviewer/pull/3)
