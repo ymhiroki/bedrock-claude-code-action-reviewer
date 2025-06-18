@@ -22,6 +22,30 @@ const TetrisUI = (function() {
     let level = 1;
     let lines = 0;
     
+    // テーマ関連
+    let currentTheme = 'default';
+    const THEMES = {
+        DEFAULT: 'default',
+        DARK: 'dark',
+        RETRO: 'retro',
+        PASTEL: 'pastel',
+        NEON: 'neon'
+    };
+    const THEME_NAMES = {
+        default: 'デフォルト',
+        dark: 'ダーク',
+        retro: 'レトロ',
+        pastel: 'パステル',
+        neon: 'ネオン'
+    };
+    const availableThemes = Object.values(THEMES);
+    let themeButtons = [];
+    
+    // DOM完全ロード確認
+    function isDOMReady() {
+        return document.readyState === 'complete' || document.readyState === 'interactive';
+    }
+    
     // 初期化
     function init(elements) {
         scoreDisplay = elements.scoreDisplay;
@@ -45,10 +69,89 @@ const TetrisUI = (function() {
             z: elements.statsZ
         };
         
+        // テーマボタンの初期化（DOM読み込み完了後に実行）
+        if (isDOMReady()) {
+            initThemeSelector();
+        } else {
+            document.addEventListener('DOMContentLoaded', initThemeSelector);
+        }
+        
         // 初期表示
         updateScore(0);
         updateLevel(1);
         updateLines(0);
+    }
+    
+    // テーマセレクターの初期化
+    function initThemeSelector() {
+        const themeSelector = document.getElementById('theme-selector');
+        if (!themeSelector) return;
+        
+        themeButtons = Array.from(themeSelector.querySelectorAll('.theme-button'));
+        
+        // ローカルストレージからテーマを復元
+        try {
+            const savedTheme = localStorage.getItem('tetris-theme');
+            if (savedTheme && availableThemes.includes(savedTheme)) {
+                setTheme(savedTheme);
+            } else {
+                setTheme(THEMES.DEFAULT);
+            }
+        } catch (error) {
+            console.error('ローカルストレージにアクセスできませんでした:', error);
+            setTheme(THEMES.DEFAULT);
+        }
+        
+        // クリックイベントを登録
+        themeButtons.forEach(button => {
+            const theme = button.dataset.theme;
+            // アクセシビリティ対応
+            button.setAttribute('aria-label', `${THEME_NAMES[theme]}テーマに変更`);
+            button.setAttribute('tabindex', '0');
+            button.setAttribute('title', THEME_NAMES[theme]);
+            button.setAttribute('aria-pressed', theme === currentTheme ? 'true' : 'false');
+            
+            // クリックとキーボード操作
+            button.addEventListener('click', () => {
+                setTheme(theme);
+            });
+            button.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setTheme(theme);
+                }
+            });
+        });
+    }
+    
+    // テーマの設定
+    function setTheme(theme) {
+        if (!availableThemes.includes(theme)) return;
+        
+        // 現在のテーマを削除
+        document.body.classList.remove(`theme-${currentTheme}`);
+        
+        // 新しいテーマを設定
+        document.body.classList.add(`theme-${theme}`);
+        currentTheme = theme;
+        
+        // アクティブなボタンを更新
+        themeButtons.forEach(button => {
+            if (button.dataset.theme === theme) {
+                button.classList.add('active');
+                button.setAttribute('aria-pressed', 'true');
+            } else {
+                button.classList.remove('active');
+                button.setAttribute('aria-pressed', 'false');
+            }
+        });
+        
+        // ローカルストレージに保存
+        try {
+            localStorage.setItem('tetris-theme', theme);
+        } catch (error) {
+            console.error('テーマをローカルストレージに保存できませんでした:', error);
+        }
     }
     
     // スコアの更新
@@ -220,6 +323,8 @@ const TetrisUI = (function() {
         togglePauseDisplay,
         updateButtons,
         resetUI,
-        getScoreInfo
+        getScoreInfo,
+        setTheme,
+        initThemeSelector
     };
 })();
